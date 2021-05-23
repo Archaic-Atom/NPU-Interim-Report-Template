@@ -1,0 +1,328 @@
+%% File: npu-report-style.tex (西北工业大学研究生学位论文选题报告表)
+%% Date: 2018/01/20
+%% Author: Yang Zongze  (yangzongze@gmail.com)
+%%
+%% 使用说明
+%% 1. 使用 `article' 类, 并使用 \input{npu-report-style.tex} 加载该文件。
+%% 2. 设置论文相关信息(参考 npu-report-sample.tex)
+%%       \nputitle{-开题报告题目-}
+%%       \npunumber{-学号-}
+%%       \npuschool{-学院-}
+%%       \npumajor{-专业-}
+%%       \npuname{-姓名-}
+%%       \npudegree{-学位-}
+%%       \npusupervisor{-导师-}
+%%       \nputype{-培养类别-}
+%%       \npudate{-日期-}
+%%       %% 设置 `论文类型': 取消或添加注释即可勾选相应类型
+%%       \npucheckbasetrue       %  基础研究
+%%       \npucheckapplytrue     %  应用研究
+%%       % \npucheckenginetrue    %  工程技术
+%%       % \npucheckoveralltrue   %  跨学科研究
+
+\usepackage{xeCJK}
+\usepackage{calc}
+\usepackage[heading=true]{ctex}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{geometry}
+\usepackage{fancybox}
+\usepackage{filecontents}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{etoolbox}
+\usepackage{ifthen}
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc,positioning,arrows}
+\pagestyle{empty}
+
+\geometry{paperwidth=210mm,paperheight=297mm,%
+  left=2.4cm,right=2.4cm,top=2.2cm,bottom=2.2cm}
+
+\fancypage{%
+  \setlength{\fboxsep}{\npusep}%
+  \setlength{\shadowsize}{0pt}%
+  \shadowbox}{}
+
+\ifx\ctexset\undefined
+  \CTEXsetup[format={\zihao{4}\bfseries}]{section}
+  \CTEXsetup[format={\zihao{-4}\bfseries}]{subsection}
+\else
+  \ctexset{%
+    section={%
+      format={\zihao{4}\bfseries},
+      beforeskip=5pt,
+      afterskip=5pt
+    }}
+  \ctexset{%
+    subsection={%
+      format={\zihao{-4}\bfseries},
+      beforeskip=5pt,
+      afterskip=0pt
+    }}
+  \ctexset{%
+    subsubsection={%
+      format={\zihao{5}\bfseries},
+      beforeskip=3pt,
+      afterskip=0pt
+    }}
+\fi
+
+\let\npusection\section
+\def\npustarsection#1{\npusection{#1}}
+\def\section{\secdef\npusection\npustarsection}
+\def\cutrule{\noindent\hskip-\npusep\rule{\npuwidth}{0.4pt}}
+
+\newlength{\npusep}
+\newlength{\npuwidth}
+\newlength{\npucorrect}
+\newlength{\npucorrecttop}
+\setlength{\npusep}{10pt}
+\setlength{\npuwidth}{\textwidth}
+\addtolength{\npuwidth}{2\npusep}
+\setlength{\npucorrect}{5pt}
+\addtolength{\npucorrect}{-\npusep}
+\setlength{\npucorrecttop}{-10pt}
+\addtolength{\npucorrecttop}{-\npusep}
+\newlength{\npucone}
+\setlength{\npucone}{2cm}
+\newlength{\npuctwo}
+\setlength{\npuctwo}{\npuwidth}
+\addtolength{\npuctwo}{-\npucone}
+\newcommand\npuitem[2][3cm]{\parbox[c][#1][c]{\npucone}{\centering #2}}
+\newcommand\npusig[2][2.5cm]{\parbox[c][#1][c]{\npuctwo}{%
+  \vskip 0pt plus15fil \hskip2cm #2：
+  \hskip 0pt plus15fil 202\quad 年\quad 月\quad 日}}
+
+\newif\ifnpucheckbase\npucheckbasefalse
+\newif\ifnpucheckapply\npucheckapplyfalse
+\newif\ifnpucheckengine\npucheckenginefalse
+\newif\ifnpucheckoverall\npucheckoverallfalse
+
+\def\npunew#1#2{%
+  \expandafter\def\csname npuinner#1\endcsname{#2}
+  \expandafter\def\csname npu#1\endcsname##1{%
+  \expandafter\def\csname npuinner#1\endcsname{##1}}}
+  
+  \npunew{title}{<开题报告题目>}
+  \npunew{number}{<学号>}
+  \npunew{school}{<学院>}
+  \npunew{major}{<专业>}
+  \npunew{name}{<姓名>}
+  \npunew{degree}{<学位>}
+  \npunew{supervisor}{<导师>}
+  \npunew{type}{<培养类别>}
+  \npunew{date}{<日期>}
+  \npunew{subjectsource}{<课题来源>}
+  \npunew{achievementnum}{<成果数量>}
+
+\def\maketitlepage{
+  \thisfancypage{}{}
+  \begin{titlepage}
+    \linespread{1.25}
+    \begin{center}
+      \newlength{\npunolenght}
+      \newlength{\nputmplenght}
+      \newcommand\npucu[1]{\uline{\hfill ##1 \hfill}}
+      \newcommand\npumb[2][\nputmplenght]{\makebox[##1][s]{##2}}
+      \newcommand\npucoveritem[2]{\npumb[\nputmplenght]{##1}\npucu{##2}\newline}
+      \zihao{-4}
+      \settowidth{\npunolenght}{20002010000000}
+      % \hfill 学号: \npumb[\npunolenght]{\npucu{\npuinnernumber}}
+      \vskip 2cm
+      {\zihao{1}\noindent \makebox[7cm][s]{西北工业大学}}\par
+      \vskip 1.5cm
+      {\kaishu\zihao{1}\noindent 博士学位论文中期考核表}\par
+      \kaishu\zihao{4}
+      \vskip 0pt plus 5fil
+      \settowidth{\nputmplenght}{学科、专业}
+      \begin{minipage}{11cm}\linespread{1.8}\selectfont
+        \noindent
+        \npucoveritem{学院}{\npuinnerschool}
+        \npucoveritem{学号}{\npuinnernumber}
+        \npucoveritem{姓名}{\npuinnername}
+        \npucoveritem{导师}{\npuinnersupervisor}
+        \npucoveritem{学科、专业}{\npuinnermajor}
+        \npucoveritem{论文题目}{\npuinnertitle}
+        \npucoveritem{考核时间}{\npuinnerdate}
+      \end{minipage}
+      \vskip 0pt plus 5fil\zihao{3}
+      \makebox[3.5cm][s]{研究生院}
+    \end{center}
+  \end{titlepage}
+  \clearpage}
+
+\def\makeinnerpage{
+  \thisfancypage{}{}
+  \begin{center}
+    \zihao{-2}  研究生学位论文选题报告的要求
+  \end{center}\vskip1cm
+  \newcounter{npulc}{%
+  \zihao{-4}
+  \begin{list}{\chinese{npulc}、}{%
+    \settowidth\labelwidth{一、}\usecounter{npulc}}
+  \item 博士学位论文中期考核报告中的一至五项必须采用计算机输入后打印。
+  \item 阶段报告为A4纸张，于左侧装订成册。各栏空格不够时，请自行加页。
+  \item 报告时间一般应在学位论文工作进行一年之后进行。
+  \item 博士学位论文中期考核表应在考核后交研究生院培养办复核。
+  \end{list}}
+  \clearpage}
+
+\def\makehead{
+  \newgeometry{paperwidth=210mm,paperheight=297mm,%
+  left=1.5cm,right=2.2cm,top=2.2cm,bottom=2.2cm}
+  \newlength{\tabline}
+  \setlength{\tabline}{180.1mm}
+  \setlength{\npuwidth}{\tabline}
+  \hrule height0pt\vskip\npucorrecttop{%
+  \renewcommand{\arraystretch}{1.5}\zihao{-4}
+  \newcolumntype{C}{>{\hfil}X<{\hfil}}
+  \noindent\hskip-\npusep
+  \begin{tabularx}{\npuwidth}{>{\centering}X|C|C|C|C|C}
+  姓\qquad 名 & \npuinnername & 学\qquad 号 & \npuinnernumber & 导\qquad 师 & \npuinnersupervisor  \\ \hline
+  题目来源 & \multicolumn{5}{c}{\npuinnersubjectsource}                                            \\ \hline
+  论文题目 & \multicolumn{5}{c}{\npuinnertitle}                                                    \\ \hline
+  \end{tabularx}}\vskip\npusep
+  \begin{center}
+  \noindent{\kaishu 研\ 究\  工\  作\  进\  展\  情\  况}
+  \end{center}
+  \par}
+
+
+\def\myachievementlist{}
+\newcommand{\addachievement}[4]{
+  \listadd{\myachievementlist}{\zihao{-5}#1 &\zihao{-5} #2 & \zihao{-5}#3 & \zihao{-5}#4}
+}
+\newcounter{index}
+\newcommand{\myachievementdo}[1]{& #1 \\ \cline{2-5}}
+\newcommand*{\writemyachievement}{\forlistloop{\myachievementdo}{\myachievementlist}}
+
+
+\def\maketail{
+  \clearpage
+  %\hrule height0pt \vfill
+  %{
+  %\renewcommand{\arraystretch}{1.5}
+  \hrule height0pt\vskip\npucorrecttop{%
+    \newcolumntype{C}{>{\hfil}X<{\hfil}}
+    %\noindent\hskip-\npusep
+    \noindent\hskip-\npusep\tabcolsep=0pt%
+    \renewcommand{\arraystretch}{1.5}\zihao{-4}%
+    \begin{tabularx}{\npuwidth}{>{\centering} c|C|c|C}
+    报\ 告\ 题\ 目 & \multicolumn{3}{c}{} \\ \hline
+    报\ 告\ 日\ 期 & \qquad 年 \qquad 月 \qquad 日 & 报\ 告\ 地\ 点 & \\ \hline
+    \multirow{2}*{\parbox{0.12\npuwidth}{%
+          \zihao{-5}
+          \centering 论文中期考核\\评议小组成员}} %
+      & \multicolumn{3}{c}{}  \\
+      & \multicolumn{3}{c}{}  \\
+    \end{tabularx}
+    \newlength{\npunewcorrecttop}
+    \setlength{\npunewcorrecttop}{0pt}
+    \hrule height0pt\vskip\npunewcorrecttop{
+      \newcolumntype{C}{>{\hfil}X<{\hfil}}
+      \noindent\hskip-\npusep
+      \renewcommand{\arraystretch}{1.5}\zihao{-4}%
+      \begin{tabularx}{\npuwidth}{>{\centering} c|C|C|C} \hline
+      \multirow{1}*{\parbox{0.12\npuwidth}{%
+          \zihao{-5}
+          \centering 其他参加\\者人数}} & 教\ 师：\qquad 人 & 博士生: \qquad 人 & 硕士生: \qquad  人 \\
+      \end{tabularx}
+    }
+    \setlength{\npunewcorrecttop}{-7.5pt}
+    \hrule height0pt\vskip\npunewcorrecttop{
+      \newcolumntype{C}{>{\hfil}X<{\hfil}}
+      \noindent\hskip-\npusep
+      \renewcommand{\arraystretch}{1.5}\zihao{-4}%
+      \begin{tabularx}{\npuwidth}{>{\centering} c|C|c|C} \hline
+        \multirow{1}*{\parbox{0.12\npuwidth}{%
+          \centering 报\ 告\ 时\ 间}} & \qquad 时 \qquad 分至 \qquad 时 \qquad 分 & 讨\ 论\ 时\ 间 & \qquad 时 \qquad 分至 \qquad 时 \qquad 分 \\ \hline
+        \multicolumn{4}{l}{\zihao{-5} 论文评议小组对中期考核报告的意见（包括论文的进度、学术水平、成果、存在问题等，作扼要记录）:} \\
+      \end{tabularx}
+    }
+  }
+
+  \clearpage
+  \hrule height0pt\vskip\npucorrecttop{%
+    \newcolumntype{C}{>{\hfil}X<{\hfil}}
+    \noindent\hskip-\npusep\tabcolsep=0pt
+    \renewcommand{\arraystretch}{1.5}\zihao{-4}%
+    \begin{tabularx}{\npuwidth}{>{\centering} c|c|p{11cm}|C|c}
+    %\hline
+    \multirow{\npuinnerachievementnum}*{\parbox{0.05\npuwidth}{%
+          \centering 科\\研\\成\\果\\目\\录}} %
+    & 序号 & \multicolumn{1}{c|}{成果名称} & 获奖级别 & 排名 \\
+    \cline{2-5}
+    \writemyachievement
+    & & & & \\ \hline
+    \end{tabularx}
+  }  
+
+  \clearpage
+  %\filbreak
+  \renewcommand{\arraystretch}{0}
+  %\hrule height0pt \vfill{
+  %\setlength{\npunewcorrecttop}{0pt}
+  \hrule height0pt\vskip\npucorrecttop{%
+    \newcolumntype{C}{>{\hfil}X<{\hfil}}
+    \noindent\hskip-\npusep\tabcolsep=0pt%
+    \renewcommand{\arraystretch}{1.5}\zihao{-4}%
+    \begin{tabularx}{\npuwidth}{>{\centering} c|lCCCC}
+    \hline\\
+    \rule{0pt}{15pt}
+    \multirow{5}*{\parbox{0.05\npuwidth}{%
+          \centering 评\\议\\小\\组\\意\\见}} & \multicolumn{2}{l}{\quad1. 论文进度:} 
+                                          & $\Box$ 超过计划； &  $\Box$ 符合计划；& $\Box$ 滞后计划 \\
+     & \multicolumn{2}{l}{\quad2. 研究工作量:}  & $\Box$ 饱满； & $\Box$ 一般；& $\Box$ 偏少 \\
+     & \multicolumn{2}{l}{\quad3. 研究成果:} & $\Box$ 显著； &  $\Box$ 一般；& $\Box$ 太少 \\
+     & \quad4. 独立科研工作能力: & $\Box$ 好； & $\Box$ 较好；& $\Box$ 一般； & $\Box$ 较差   \\
+     & \quad5. 总体评价: & $\Box$ 好； & $\Box$ 良好；& $\Box$ 合格；& $\Box$ 不合格 \\ 
+     \\
+     \hline
+     \multirow{16}*{\parbox{0.05\npuwidth}{%
+          \centering 评\\议\\小\\组\\建\\议}} & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\
+    & \multicolumn{5}{l}{} \\  
+    & \multicolumn{3}{c}{评议小组负责人（签字）:} & \multicolumn{2}{c}{\qquad 年 \qquad 月 \qquad 日} \\ \hline
+    \multirow{2}*{\parbox{0.05\npuwidth}{%
+          \centering 备注}} & \multicolumn{5}{l}{} \\
+    && \\ %\hline
+    %\npuitem[2.5cm]{备注}                  &  \\
+    \end{tabularx}
+    \begin{tikzpicture}[remember picture,overlay]
+    \draw[,,line width=0.4pt]($(current page.north)+(-7.94cm,-27cm)$)--($(current page.south)+(-7.94cm,1.47cm)$);
+    %\draw[line width=0.5pt,purple,latex-latex,,]($(current page.north west)+(0cm,-4cm)$)--($(current page.north)+(0cm,-4cm)$);
+    \end{tikzpicture}
+    }
+  %}
+ }
+
+\AtBeginDocument{\maketitlepage\makeinnerpage\makehead}
+\AtEndDocument{\maketail}
+\renewcommand{\normalsize}{\zihao{5}}
+\pagestyle{plain}
+
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{corollary}[theorem]{推论}
+\newtheorem{proposition}[theorem]{命题}
+% \theoremstyle{definition}
+\newtheorem{definition}[theorem]{定义}
+
+% \linespread{1.5}

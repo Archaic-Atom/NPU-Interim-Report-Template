@@ -1,0 +1,80 @@
+%% File: npu-report-sample.tex (西北工业大学研究生学位论文选题报告表)
+%% Date: 2018/01/20
+%% Author: Yang Zongze  (yangzongze@gmail.com)
+\documentclass{article}
+\usepackage{npu-report-style}
+\usepackage[pagebackref=false, colorlinks, linkcolor=red, anchorcolor=yellow, citecolor=blue, bookmarks=false ]{hyperref}
+\usepackage{graphicx, subfig, epstopdf, amsmath, booktabs, paralist, float, caption, xfrac, enumitem, array, multirow, cite}
+\usepackage{gbt7714}
+\usepackage{zhnumber}
+\usepackage{titlesec}
+
+
+\newcommand{\erhao}{\fontsize{12pt}{\baselineskip}\selectfont}
+\titleformat{\section}{\erhao\bf}{}{0em}{}[]
+\renewcommand\figureautorefname{图}		% 重新定义引用图标
+\renewcommand\tableautorefname{表}		% 重新定义应用表格
+\def\equationautorefname{式}				% 重新定义公式
+
+%% 设置 `论文题目' 
+\nputitle{遥感图像的语义分割与场景重建研究}
+\npunumber{2017100580}
+\npuschool{电子信息学院}
+\npumajor{信息与通信工程}
+\npuname{饶智博}
+\npudegree{博士}
+\npusupervisor{何明一\ 教授}
+\nputype{全日制学术型}
+\npusubjectsource{国家自然科学基金}
+\npudate{\today}
+%% 设置 `论文类型': 取消或添加注释即可勾选相应类型
+%\npucheckbasetrue   	%  基础研究
+\npucheckapplytrue     	%  应用研究
+\npucheckenginetrue   	%  工程技术
+%\npucheckoveralltrue   	%  跨学科研究
+\addachievement{1}{Bidirectional guided attention network for 3-d semantic detection of remote sensing images (已发表, SCI 1 区，学院标准 A类)}{SCI期刊论文(TGRS)}{1}
+\addachievement{2}{Patch attention network with generative adversarial model for semi-supervised binocular disparity prediction (已发表,  SCI 4 区)}{SCI期刊论文(TJVC)}{1}
+\addachievement{3}{Nlca-net: a non-local context attention network for stereo matching (已发表)}{EI期刊论文(ATSIP)}{1}
+\addachievement{4}{Msdc-net: Multi-scale dense and contextual networks for stereo matching (已发表)}{EI会议(APSIPA ASC)}{1}
+\addachievement{5}{Sdbf-net: Semantic and disparity bidirectional fusion network for 3d semantic detection on incidental satellite images(已发表)}{EI会议(APSIPA ASC)}{1}
+\addachievement{6}{Input-perturbation-sensitivity for performance analysis of cnns on image recognition}{EI会议(ICIP)}{1}
+\addachievement{7}{Class Attention Network for Semantic Segmentation of Remote Sensing Images(已发表)}{EI会议(APSIPA ASC)}{1}
+\addachievement{8}{Image2Mesh: 3D mesh reconstruction framework from pairwise remote sensing images (投稿中)}{EI会议}{1}
+\addachievement{9}{Rethinking Pre-training and Data Augmentation in Robust Vision Challenge of Stereo Matching(投稿中)}{SCI期刊}{1}
+\addachievement{10}{ECCV Robust Challenge 2020 (stereo matching 赛道)}{国际竞赛第二名}{1}
+\addachievement{11}{CFNet: Cascade and Fused Cost Volume for Efficient and Robust Stereo Matching (已发表)}{EI会议(CVPR)}{3}
+\addachievement{12}{Mvs2: Deep unsupervised multi-view stereo with multi-view symmetry(已发表)}{EI会议(3DV)}{3}
+\addachievement{13}{Multi-scale cross-form pyramid network for stereo matching (已发表)}{EI会议(ICIEA)}{4}
+\addachievement{14}{TPMT based Automatic Road Extraction from 3D Real Scenes (已发表)}{EI会议(BGDDS)}{4}
+\addachievement{15}{一种基于PC/104嵌入式系统的旋翼共锥度机载测量装置及方法 (已授权)}{发明专利}{3}
+\addachievement{16}{MSMD-Net: Deep Stereo Matching with Multi-scale and Multi-dimension Cost Volume (投稿中)}{SCI期刊}{3}
+\addachievement{17}{Sar and optical image template matching based on neural network (投稿中)}{EI期刊(会议)}{3}
+\npuachievementnum{17}
+
+\begin{document}
+\section*{一、哪些研究内容已按时或提前完成，主要进展和成果。}
+\begin{enumerate}
+\item 针对遥感图像中标签分布不均衡的问题，本研究提出了类注意力网络（Class attention network, CA-Net）。该方法利用注意力机制关注遥感图像中小型目标物体，并利用多种数据增强和Focal损失函数较好地缓解了遥感图像中标签不平衡的问题。本研究提出的语义分割算法有效地提高了算法的分类精度，尤其是小目标物体的分类结果。\textbf{该研究成果已经发表在EI会议中}\cite{Rao2020Class}（2020 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference, APSIPA ASC）。
+\item 针对传统立体匹配算法中反光区域匹配难和遮挡区域误匹配问题，本研究首先提出多尺度稠密上下文网络（Multi-scale dense and contextual networks, MSDC-Net）。该方法利用多尺度特征构建匹配代价量（Cost volume），有效地增强了网络的场景能力，从而提高了特定区域的匹配精度。\textbf{该研究成果已经发表在EI会议中}\cite{Rao2019Msdc}（2019 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference, APSIPA ASC）。在该项目基础上，本研究引入非局部注意力机制（Non-local attention mechanism），从而进一步提升了匹配的精度和难点区域的表现。\textbf{该研究成果已经发表在EI期刊中}\cite{Rao2020Nlca}（APSIPA Transactions on Signal and Information Processing, ATSIP），\textbf{并获得了ECCV鲁棒视觉挑战赛（ECCV Robust Challenge 2020）的第二名}。
+\item 针对遥感图像立体匹配算法中四季变换问题，本研究首先研究了语义和视差的融合方法，称之为语义视差双向融合网络（Semantic and disparity bidirectional fusion network, SDBF-net ）。该方法证明语义和视差信息能够互相促进。\textbf{该研究成果已经发表在EI会议中}\cite{Rao2019Sdbf}（2019 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference, APSIPA ASC）。在此项目的基础上，本研究提出了一个语义视差的多任务学习框架，该框架成为双向注意力引导网络（Bidirectional Guided Attention Network, BGA-Net）。该方法能同时进行语义分类和视差估计，并证明语义信息能够有效地提高网络的场景理解能力，从而克服遥感场景下四季变换问题，进而提高遥感图像的匹配精度。\textbf{该方法取得了US3D排行榜的第一，且相关成果已经发表在SCI期刊中}\cite{Rao2020BiDirectional}（IEEE Transactions on Geoscience and Remote Sensing, TGRS）。
+\item 在现有研究基础上，针对现有的深度学习模型非常依赖大数据训练的问题，本研究提出了一个适用于匹配问题的半监督模型。该方法利用生成对抗网络生成样本和鉴别样本的能力，构建了一个半监督网络模型。其次，采用一种块注意力方式代替之前常用的三维卷积，以减少模型参数和使用内存。\textbf{该研究成果已经发表在SCI期刊中}\cite{Rao2020Patch}（The Visual Computer）。
+\end{enumerate}
+
+\section{二、哪些研究内容未按计划完成，原因何在？}
+无
+
+\section{三、存在的问题和需要说明的情况（调整变动内容）。}
+无
+
+\section{四、后续研究工作安排。}
+\begin{enumerate}
+\item 对正在审稿的论文，按要求进行规整、补充和完善，力争将正在投稿中的论文转变成已发表论文；
+\item 将已发表的论文进行规整，并完成大论文的撰写与修改；
+\item 研究项目总结验收，论文修改及答辩。
+\end{enumerate}
+
+\bibliographystyle{gbt7714-numerical}
+\bibliography{Cite}
+\end{document}
+
+
